@@ -1,0 +1,6 @@
+.agents/
+.codex/
+.aws/
+deploy.zip
+*.log
+php_errors.log

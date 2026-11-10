@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS cancare_connect
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE cancare_connect;
+
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  email VARCHAR(190) NOT NULL,
+  company VARCHAR(190) NULL,
+  phone VARCHAR(80) NULL,
+  message TEXT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
