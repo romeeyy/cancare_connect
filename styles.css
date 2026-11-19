@@ -593,8 +593,8 @@ textarea {
 /* Keep profiles 2 and 3 fully visible so their portraits are not cropped. */
 .founder-slide[data-profile="1"] img,
 .founder-slide[data-profile="2"] img {
-  width: 88%;
-  height: 88%;
+  width: 76%;
+  height: 76%;
   margin: 0 auto;
   object-fit: contain;
   object-position: center top;
