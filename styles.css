@@ -590,6 +590,19 @@ textarea {
   transform: scale(1);
 }
 
+/* Keep profiles 2 and 3 fully visible so their portraits are not cropped. */
+.founder-slide[data-profile="1"] img,
+.founder-slide[data-profile="2"] img {
+  object-fit: contain;
+  object-position: center top;
+  background: #fff;
+}
+
+.founder-slide[data-profile="1"].is-active img,
+.founder-slide[data-profile="2"].is-active img {
+  transform: scale(1);
+}
+
 .founder-overlay {
   position: absolute;
   right: 0;
