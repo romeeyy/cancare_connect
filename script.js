@@ -289,6 +289,79 @@ document.querySelector(".contact-form")?.addEventListener("submit", (event) => {
 window.addEventListener("DOMContentLoaded", initIcons);
 window.addEventListener("load", initIcons);
 
+// Founder and Co-Founder Showcase: vanilla crossfade slideshow with keyboard-accessible dots.
+const founderShowcase = document.querySelector(".founder-showcase");
+
+if (founderShowcase) {
+  const founderSlides = [...founderShowcase.querySelectorAll(".founder-slide")];
+  const founderDots = [...founderShowcase.querySelectorAll(".founder-dot")];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let founderIndex = 0;
+  let founderTimer;
+  let founderHovered = false;
+
+  const showFounder = (nextIndex) => {
+    founderIndex = (nextIndex + founderSlides.length) % founderSlides.length;
+
+    founderSlides.forEach((slide, index) => {
+      const isActive = index === founderIndex;
+      slide.classList.toggle("is-active", isActive);
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+
+    founderDots.forEach((dot, index) => {
+      const isActive = index === founderIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+      dot.tabIndex = isActive ? 0 : -1;
+    });
+  };
+
+  const stopFounderTimer = () => {
+    window.clearTimeout(founderTimer);
+  };
+
+  const scheduleFounder = () => {
+    stopFounderTimer();
+    if (reducedMotion.matches || founderHovered) return;
+    founderTimer = window.setTimeout(() => {
+      showFounder(founderIndex + 1);
+      scheduleFounder();
+    }, 3000);
+  };
+
+  founderDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showFounder(index);
+      scheduleFounder();
+    });
+
+    dot.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const nextIndex = (index + direction + founderDots.length) % founderDots.length;
+      founderDots[nextIndex].focus();
+      showFounder(nextIndex);
+      scheduleFounder();
+    });
+  });
+
+  founderShowcase.addEventListener("mouseenter", () => {
+    founderHovered = true;
+    stopFounderTimer();
+  });
+
+  founderShowcase.addEventListener("mouseleave", () => {
+    founderHovered = false;
+    scheduleFounder();
+  });
+
+  reducedMotion.addEventListener?.("change", scheduleFounder);
+  showFounder(0);
+  scheduleFounder();
+}
+
 const calendlyModal = document.querySelector("#calendly-modal");
 
 if (calendlyModal) {

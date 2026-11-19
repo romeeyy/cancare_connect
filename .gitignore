@@ -2,5 +2,6 @@
 .codex/
 .aws/
 deploy.zip
+config.php
 *.log
 php_errors.log
