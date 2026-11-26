@@ -543,7 +543,7 @@ textarea {
   overflow: hidden;
   border: 1px solid rgba(0, 87, 255, 0.14);
   border-radius: 28px;
-  background: linear-gradient(145deg, #eaf4ff, #dcecff);
+  background: #fff;
   box-shadow: 0 22px 60px rgba(0, 67, 170, 0.14);
 }
 
@@ -590,15 +590,19 @@ textarea {
   transform: scale(1);
 }
 
-/* Keep profiles 2 and 3 fully visible so their portraits are not cropped. */
+/* Give the portrait profiles a little breathing room inside the card. */
+.founder-slide[data-profile="1"],
+.founder-slide[data-profile="2"] {
+  background: #fff;
+}
+
 .founder-slide[data-profile="1"] img,
 .founder-slide[data-profile="2"] img {
-  width: 76%;
-  height: 76%;
-  margin: 0 auto;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  object-fit: cover;
   object-position: center top;
-  background: #fff;
 }
 
 .founder-slide[data-profile="1"].is-active img,
@@ -611,11 +615,11 @@ textarea {
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 72px 26px 24px;
+  padding: 128px 26px 26px;
   color: #fff;
-  background: linear-gradient(180deg, transparent, rgba(4, 18, 56, 0.92) 74%);
+  background: linear-gradient(180deg, transparent 0%, rgba(4, 18, 56, 0.18) 30%, rgba(4, 18, 56, 0.96) 100%);
   transform: translateY(0);
-  transition: padding 300ms ease, background 300ms ease;
+  transition: background 300ms ease;
 }
 
 .founder-label,
@@ -647,28 +651,33 @@ textarea {
 }
 
 .founder-description {
-  max-height: 0;
-  overflow: hidden;
+  max-height: 80px;
+  overflow: visible;
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.92rem;
   line-height: 1.55;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: max-height 350ms ease, opacity 350ms ease, transform 350ms ease;
+  opacity: 1;
+  transform: none;
 }
 
 .founder-showcase:hover .founder-overlay,
 .founder-showcase:focus-within .founder-overlay {
-  padding-bottom: 26px;
-  background: linear-gradient(180deg, transparent, rgba(4, 18, 56, 0.96) 58%);
+  background: linear-gradient(180deg, transparent 0%, rgba(4, 18, 56, 0.24) 30%, rgba(4, 18, 56, 0.98) 100%);
 }
 
-.founder-showcase:hover .founder-description,
-.founder-showcase:focus-within .founder-description {
-  max-height: 80px;
-  margin-top: 10px;
-  opacity: 1;
-  transform: translateY(0);
+@media (max-width: 720px) {
+  .founder-overlay {
+    padding: 88px 18px 18px;
+  }
+
+  .founder-overlay h3 {
+    font-size: 1.25rem;
+  }
+
+  .founder-role,
+  .founder-description {
+    font-size: 0.84rem;
+  }
 }
 
 .founder-dots {
